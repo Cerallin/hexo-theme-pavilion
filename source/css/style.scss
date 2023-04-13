@@ -1,0 +1,38 @@
+@import '_defaults/colors.scss';
+// TODO fonts
+@import '_defaults/fonts.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.scss';
+
+body {
+    margin: 0;
+    color: $text-color;
+    background-color: $bg-color;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:visited {
+        color: $link-color;
+    }
+}
+
+.header {
+    background-color: $bg-sub-color;
+    color: $link-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .header-menu {
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    a, a:visited, a:hover {
+        color: $link-stress-color;
+    }
+}

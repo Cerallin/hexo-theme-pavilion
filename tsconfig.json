@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "declaration": false,
+        "outDir": "scripts",
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src/*.ts",
+    ],
+    "exclude": [
+        "scripts"
+    ]
+}

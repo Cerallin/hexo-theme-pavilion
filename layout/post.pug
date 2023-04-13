@@ -1,0 +1,23 @@
+extends layout/layout
+
+block content
+    // Item info
+    // TODO check posts categories
+    unless page.categories.length < 1
+        - const category = page.categories.data[0].name
+        case category
+            when "anime"
+                include item-info/anime
+            when "book"
+                include item-info/book
+            when "comic"
+                include item-info/comic
+            when "game"
+                include item-info/game
+            when "music"
+            default
+                include item-info/music
+
+    // content
+    .article-contents
+    != page.content

@@ -1,0 +1,20 @@
+doctype html
+html(lang=config.language)
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width,initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+        block css
+    body
+        // header
+        include header
+        // body content
+        if body
+            div!= body
+        else
+            block content
+        // footer
+        include footer
+
+    block js

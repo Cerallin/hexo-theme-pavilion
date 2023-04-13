@@ -1,0 +1,15 @@
+menu:
+  anime: 动画
+  comics: 漫画
+  games: 游戏
+  books: 书籍
+  music: 音乐
+
+  about: 关于
+
+entries:
+  anime: 动&ensp;画
+  comics: 漫&ensp;画
+  games: 游&ensp;戏
+  books: 书&ensp;籍
+  music: 音&ensp;乐

@@ -1,0 +1,14 @@
+header.header
+    // brand?
+    .header-brand
+        a(href='/')= config.title
+    // menu links
+    .header-menu
+        .menu-item= __('menu.anime')
+        .menu-item= __('menu.comics')
+        //- .menu-item= __('menu.games')
+        .menu-item= __('menu.books')
+        .menu-item= __('menu.music')
+    // about page
+    .header-link
+        a(href='/about')= __('menu.about')

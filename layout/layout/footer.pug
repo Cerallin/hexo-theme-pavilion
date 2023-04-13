@@ -1,0 +1,16 @@
+- const cur_year = date(Date.now(), "YYYY");
+
+footer.footer
+    .footer-copy &copy;
+        |
+        |
+        = config.author
+        |
+        |
+        = config.start_year
+        if (cur_year > config.start_year)
+            |
+            | -
+            |
+            |
+            = cur_year

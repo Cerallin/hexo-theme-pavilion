@@ -1,0 +1,57 @@
+@import './_defaults/colors.scss';
+@import './_defaults/fonts.scss';
+
+.index-container {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .index-title-box {
+        margin-top: 30vh;
+
+        .index-title {
+            font-family: ark-pixel-12;
+            font-size: 48px;
+            text-shadow: 5px 5px $bg-sub-color;
+
+            h1 {
+                font-weight: normal;
+                line-height: 1;
+                margin: 0;
+            }
+        }
+
+        .index-author {
+            color: $dim-color;
+            padding: 5px 0 0 5px;
+
+            font-family: ark-pixel-10;
+            font-size: 40px;
+        }
+    }
+
+    .index-entries {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.25em;
+
+        $entry-title-size: 24px;
+
+        .entry-title {
+            text-shadow: 2px 2px $dim-color;
+
+            font-size: $entry-title-size;
+            font-family: ark-pixel-12;
+            line-height: 1;
+        }
+
+        .entry-seperator::before {
+            content: '·'; // U+000B7 or &middot;
+            font-size: $entry-title-size;
+            font-family: ark-pixel-12;
+        }
+    }
+}

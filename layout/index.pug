@@ -1,0 +1,51 @@
+doctype html
+html(lang=config.language)
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width,initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="stylesheet", href="css/index.css")
+    body
+        // head
+
+        // title
+        .index-container
+            .index-title-box
+                .index-title
+                    h1= config.title
+                    if config.subtitle
+                        span= config.subtitle
+                a(href=config.pavilion['author-link'] || '').index-author @
+                    |
+                    span= config.author
+            // entries
+            .index-entries
+                .category-entry
+                    h2.entry-title
+                        a(href='/categories/anime')= __('menu.anime')
+
+                .entry-seperator
+
+                .category-entry
+                    h2.entry-title
+                        a(href='/categories/book')= __('menu.books')
+
+                .entry-seperator
+
+                .category-entry
+                    h2.entry-title
+                        a(href='/categories/comic')= __('menu.comics')
+
+                .entry-seperator
+
+                .category-entry
+                    h2.entry-title
+                        a(href='/categories/music')= __('menu.music')
+                //- include entries/anime
+                //- include entries/book
+                //- include entries/comic
+                //- include entries/game
+                //- include entries/music
+
+        // footer
