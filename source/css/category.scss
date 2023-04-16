@@ -2,11 +2,14 @@
 
 .item-list {
   $width: 100%;
-  width: $width;
-  display: grid;
-  row-gap: 10vh;
 
+  width: $width;
+  margin-top: 40px;
+  row-gap: 30px;
+
+  display: grid;
   grid-template-columns: repeat(2, $width / 2);
+  justify-items: center;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, $width / 3);
@@ -15,8 +18,6 @@
   @media (min-width: 1200px) {
     grid-template-columns: repeat(5, $width / 5);
   }
-
-  justify-items: center;
 
   .item-wrapper {
     display: flex;

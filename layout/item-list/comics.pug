@@ -1,5 +1,5 @@
 .item-list(data-item-type='comic')
-    each post in posts_query({category: 'comic'})
+    each post in posts_sort(posts_query({category: 'comic'}))
         - const meta = post_meta(post)
         - const isSeries = Array.isArray(post.isbn)
         - const title = post.title + (isSeries ? __('item-list.series') : '')
