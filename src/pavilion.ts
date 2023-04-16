@@ -20,10 +20,13 @@ const pavilion = new MetaManager({
 async function run_task(options: IOptions) {
     const { post, manager, managerOptions, category, uniqID } = options;
 
-    const metaInfo = await manager.get(managerOptions);
-
-    post.meta = metaInfo;
-    hexo.log.info(`${metaInfo.cached ? 'Cached' : 'Downloaded'} ${category} meta: ${metaInfo.title} (${uniqID.id}: ${uniqID.value})`)
+    try {
+        const metaInfo = await manager.get(managerOptions);
+        post.meta = metaInfo;
+        hexo.log.info(`${metaInfo.cached ? 'Cached' : 'Downloaded'} ${category} meta: ${metaInfo.title} (${uniqID.id}: ${uniqID.value})`)
+    } catch (e) {
+        hexo.log.error(e);
+    }
 }
 
 function post_options(post): IOptions[] {

@@ -1,0 +1,8 @@
+.item-list(data-item-type='anime')
+    each post in posts_query({category: 'anime'})
+        - const meta = post_meta(post)
+
+        .item-wrapper
+            a(href= url_for(post.path), alt= title)
+                .item-image(data-is-series= isSeries)
+                    img(src= meta.thumbnail, alt= post.title, loading="lazy")

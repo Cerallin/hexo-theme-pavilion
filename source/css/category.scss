@@ -1,18 +1,36 @@
 @import './_defaults/colors.scss';
 
 .item-list {
-  width: 100%;
+  $width: 100%;
+  width: $width;
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  row-gap: 10vh;
+
+  grid-template-columns: repeat(2, $width / 2);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, $width / 3);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(5, $width / 5);
+  }
+
   justify-items: center;
 
+  .item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+}
+
+.item-list[data-item-type="book"],
+.item-list[data-item-type="comic"] {
   .item-wrapper {
     $paper-width: 210px;
     $paper-height: 297px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     width: $paper-width;
 
     @mixin book-image() {
@@ -89,6 +107,91 @@
         &:nth-child(2) {
           width: 90%;
         }
+      }
+    }
+  }
+}
+
+.item-list[data-item-type="anime"] {
+  .item-image {
+    width: 200px;
+
+    img {
+      object-fit: cover;
+
+      width: inherit;
+
+      border: 1px solid $dim-color;
+      border-radius: 5px;
+    }
+  }
+}
+
+.item-list[data-item-type="music"] {
+  $cover-size: 200px;
+
+  .item-wrapper {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    *::before,
+    *::after {
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+    }
+
+    .cd-case {
+      //border: 1px solid;
+      width: 1.1 * $cover-size;
+      height: $cover-size;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0.1rem;
+
+      &::after {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0.15rem;
+        background:
+          radial-gradient(circle at 50% 0%, #ffffff42 45%, #ffffffaa calc(45% + 0.1rem) 47%, transparent calc(47% + 0.1rem)) 20% 0% / 10% 10% no-repeat,
+          radial-gradient(circle at 50% 0%, #ffffff42 45%, #ffffffaa calc(45% + 0.1rem) 47%, transparent calc(47% + 0.1rem)) 85% 0% / 10% 10% no-repeat,
+          radial-gradient(circle at 50% 100%, #ffffff42 45%, #ffffffaa calc(45% + 0.1rem) 47%, transparent calc(47% + 0.1rem)) 20% 100% / 10% 10% no-repeat,
+          radial-gradient(circle at 50% 100%, #ffffff42 45%, #ffffffaa calc(45% + 0.1rem) 47%, transparent calc(47% + 0.1rem)) 85% 100% / 10% 10% no-repeat,
+          linear-gradient(#2e2e2e44, #2e2e2e44);
+      }
+    }
+
+    .ridge {
+      width: 9.4%;
+      height: 99.2%;
+      border-radius: 0.15rem;
+      background: blue;
+      background:
+        linear-gradient(to right, #353535 10%, #222222 20%, #181818 35% 95%, #101010 95%) 97% 0 / 20% 100% no-repeat,
+        repeating-linear-gradient(to right, #353535 0% 4%, #202020 6% 10.3%, #171717 11% 18%) 35% 0 / 70% 100% no-repeat,
+        linear-gradient(#1e1e1e, #242424) 0 0 / 15% 100% no-repeat;
+    }
+
+    .cd {
+      width: 89.2%;
+      height: 98.4%;
+      background: #323232;
+      box-shadow:
+        inset -0.35rem 0.3rem #272727,
+        inset 0 -0.15rem #272727;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

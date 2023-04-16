@@ -1,0 +1,9 @@
+.item-list(data-item-type='music')
+    each post in posts_query({category: 'music'})
+        - const meta = post_meta(post)
+        .item-wrapper
+            a(href= url_for(post.path), alt= post.title, title= post.title)
+                .cd-case
+                    .ridge
+                    .cd
+                        img(src= meta.cover, alt= post.title, loading="lazy")
