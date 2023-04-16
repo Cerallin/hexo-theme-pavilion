@@ -1,7 +1,10 @@
-extends _item
+- const meta = post_meta(page)
 
-block content
-    - const meta = post_meta(page)
-    img(src= meta.thumbnail, alt= meta.title)
-    p this is a book
-    - page.title
+.book-info
+    img.book-image(src= meta.thumbnail, alt= meta.title)
+    .book-info-box
+        .book-date= meta.date
+        .book-title= meta.title
+        .book-authors
+            each author of meta.authors
+                .author-name= author

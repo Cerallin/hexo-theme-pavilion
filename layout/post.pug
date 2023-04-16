@@ -1,23 +1,23 @@
-extends layout/layout
+extends page
+
+block css
+    link(rel="stylesheet", href="/css/article.css")
 
 block content
-    // Item info
-    // TODO check posts categories
-    unless page.categories.length < 1
-        - const category = page.categories.data[0].name
-        case category
-            when "anime"
+    .article
+        // Item info
+        // TODO check posts categories
+        unless page.categories.length < 1
+            if has_category(page, 'anime')
                 include item-info/anime
-            when "book"
+            else if has_category(page, 'book')
                 include item-info/book
-            when "comic"
-                include item-info/comic
-            when "game"
-                include item-info/game
-            when "music"
-            default
+            else if has_category(page, 'comic')
+                include item-info/book
+            else
                 include item-info/music
 
-    // content
-    .article-contents
-    != page.content
+        // content
+        .article-contents
+            h2.article-title= page.title
+            != page.content

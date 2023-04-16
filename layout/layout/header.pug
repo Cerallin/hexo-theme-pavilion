@@ -6,9 +6,8 @@ header.header
     ul.header-menu
         li.menu-item(data-stressed= page.category == 'anime')
             a(href='/categories/anime')= __('menu.anime')
-        .menu-item(data-stressed= page.category == 'comic')
+        li.menu-item(data-stressed= page.category == 'comic')
             a(href='/categories/comic')= __('menu.comics')
-        //- .menu-item= __('menu.games')
         li.menu-item(data-stressed= page.category == 'book')
             a(href='/categories/book')= __('menu.books')
         li.menu-item(data-stressed= page.category == 'music')

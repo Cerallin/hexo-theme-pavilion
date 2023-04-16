@@ -14,6 +14,20 @@ body {
     margin: 24px;
 }
 
+.body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:has(.page-content) {
+        align-items: flex-start;
+    }
+
+    .page-content {
+        max-width: 900px;
+    }
+}
+
 a {
     color: $link-color;
     text-decoration: none;
