@@ -2,10 +2,11 @@ import Hexo = require('hexo');
 import { IMetaOptions, AbstractManager, MetaManager } from 'pavilion-core';
 
 interface IOptions {
-    manager: AbstractManager,
-    managerOptions: IMetaOptions,
-    category: 'book' | 'comic' | 'CD' | 'anime',
-    uniqID: string,
+    post;
+    manager: AbstractManager;
+    managerOptions: IMetaOptions;
+    category: 'book' | 'comic' | 'CD' | 'anime';
+    uniqID: { id: string, value: string };
 };
 
 function has_category(post, category: string) {
@@ -16,62 +17,85 @@ const pavilion = new MetaManager({
     dbPath: `${__dirname}/../database`
 });
 
-hexo.extend.console.register('tag', 'generate tags for posts', async function loadAll() {
-    await hexo.load();
+async function run_task(options: IOptions) {
+    const { post, manager, managerOptions, category, uniqID } = options;
 
-    for (const post of hexo.locals.get('posts').toArray()) {
-        await (async function (
-            post,   
-            options: IOptions) {
-            const { manager, managerOptions, category, uniqID } = options;
+    const metaInfo = await manager.get(managerOptions);
 
-            const metaInfo = await manager.get(managerOptions);
+    post.meta = metaInfo;
+    hexo.log.info(`${metaInfo.cached ? 'Cached' : 'Downloaded'} ${category} meta: ${metaInfo.title} (${uniqID.id}: ${uniqID.value})`)
+}
 
-            post.meta = metaInfo;
-            hexo.log.info(`${metaInfo.cached ? 'Cached' : 'Downloaded'} ${category} meta: ${metaInfo.title} (${uniqID}: ${post[uniqID]})`)
-        })(
-            post,
-            (function (post): IOptions {
-                if (has_category(post, 'book')) { // books
-                    return {
-                        manager: pavilion.book,
-                        managerOptions: { isbn: post.isbn },
-                        category: 'book',
-                        uniqID: 'isbn',
-                    };
-                } else if (has_category(post, 'comic')) { // comics
-                    return {
-                        manager: pavilion.comic,
-                        managerOptions: { isbn: post.isbn },
-                        category: 'comic',
-                        uniqID: 'isbn',
-                    };
-                } else if (has_category(post, 'music')) { // music
-                    return {
-                        manager: pavilion.music,
-                        managerOptions: { discID: post.discID },
-                        category: 'CD',
-                        uniqID: 'discID'
-                    };
-                } else if (has_category(post, 'anime')) { // anime
-                    return {
-                        manager: pavilion.anime,
-                        managerOptions: { subject_id: post.subject_id },
-                        category: 'anime',
-                        uniqID: 'subject_id',
-                    }
-                }
-            })(post));
+function post_options(post): IOptions[] {
+    if (has_category(post, 'book')) { // books
+        const isbnList = (Array.isArray(post.isbn)) ? post.isbn : [post.isbn];
+        return isbnList.map(isbn => ({
+            post: post,
+            manager: pavilion.book,
+            managerOptions: { isbn: isbn },
+            category: 'book',
+            uniqID: { id: 'isbn', value: isbn },
+        }));
     }
+    else if (has_category(post, 'comic')) { // comics
+        const isbnList = (Array.isArray(post.isbn)) ? post.isbn : [post.isbn];
+        return isbnList.map(isbn => ({
+            post: post,
+            manager: pavilion.comic,
+            managerOptions: { isbn: isbn },
+            category: 'comic',
+            uniqID: { id: 'isbn', value: isbn },
+        }));
+    }
+    else if (has_category(post, 'music')) { // music
+        return [{
+            post: post,
+            manager: pavilion.music,
+            managerOptions: { discID: post.discID },
+            category: 'CD',
+            uniqID: { id: 'discID', value: post.discID },
+        }];
+    }
+    else if (has_category(post, 'anime')) { // anime
+        return [{
+            post: post,
+            manager: pavilion.anime,
+            managerOptions: { subject_id: post.subject_id },
+            category: 'anime',
+            uniqID: { id: 'subject_id', value: post.subject_id },
+        }];
+    }
+}
 
-    pavilion.saveAll();
-})
+hexo.extend.helper.register('has_category', has_category);
+
+hexo.extend.console.register('tag', 'generate tags for posts',
+    async function () {
+        await hexo.load();
+
+        const tasks: IOptions[] = [].concat(
+            ...hexo.locals.get('posts').toArray().map(post_options));
+
+        for (const task of tasks) {
+            await run_task(task);
+        }
+
+        pavilion.saveAll();
+    }
+);
 
 hexo.extend.helper.register('post_meta', function (post: Hexo.Locals.Post) {
+    function post_isbn(post: Hexo.Locals.Post): number {
+        if (Array.isArray(post.isbn) && post.isbn.length) {
+            return post.isbn[0];
+        }
+        return post.isbn;
+    }
+
     if (has_category(post, 'book')) {
-        return pavilion.book.cachedInfo({ isbn: post.isbn });
+        return pavilion.book.cachedInfo({ isbn: post_isbn(post) });
     } else if (has_category(post, 'comic')) { // comics
-        return pavilion.comic.cachedInfo({ isbn: post.isbn });
+        return pavilion.comic.cachedInfo({ isbn: post_isbn(post) });
     } else if (has_category(post, 'music')) { // music
         return pavilion.music.cachedInfo({ discID: post.discID });
     } else if (has_category(post, 'anime')) { // anime

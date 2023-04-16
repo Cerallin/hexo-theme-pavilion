@@ -3,12 +3,16 @@ header.header
     .header-brand
         a(href='/')= config.title
     // menu links
-    .header-menu
-        .menu-item= __('menu.anime')
-        .menu-item= __('menu.comics')
+    ul.header-menu
+        li.menu-item(data-stressed= page.category == 'anime')
+            a(href='/categories/anime')= __('menu.anime')
+        .menu-item(data-stressed= page.category == 'comic')
+            a(href='/categories/comic')= __('menu.comics')
         //- .menu-item= __('menu.games')
-        .menu-item= __('menu.books')
-        .menu-item= __('menu.music')
+        li.menu-item(data-stressed= page.category == 'book')
+            a(href='/categories/book')= __('menu.books')
+        li.menu-item(data-stressed= page.category == 'music')
+            a(href='/categories/music')= __('menu.music')
     // about page
     .header-link
         a(href='/about')= __('menu.about')

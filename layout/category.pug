@@ -1,0 +1,11 @@
+extend layout/layout
+
+block css
+    link(rel="stylesheet", href="/css/category.css")
+
+block content
+    case page.category
+        when 'book'
+            include item-list/books
+        when 'comic'
+            include item-list/comics

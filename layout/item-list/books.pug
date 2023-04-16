@@ -1,0 +1,16 @@
+.item-list(data-item-type='book')
+    each post in posts_query({category: 'book'})
+        - const meta = post_meta(post)
+        - const isSeries = Array.isArray(post.isbn)
+        - const title = post.title + (isSeries ? __('item-list.series') : '')
+
+        .item-wrapper
+            if isSeries
+                .item-series
+                    .item-series-box
+                    .item-series-box
+            a(href= url_for(post.path), alt= title)
+                .item-image(data-is-series= isSeries)
+                    img(src= meta.thumbnail, alt= post.title, loading="lazy")
+                    .item-caption
+                        h2= title

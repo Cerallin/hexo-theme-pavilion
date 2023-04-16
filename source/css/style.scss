@@ -1,12 +1,17 @@
-@import '_defaults/colors.scss';
+@import './_defaults/colors.scss';
 // TODO fonts
 @import '_defaults/fonts.scss';
 @import '~bootstrap-icons/font/bootstrap-icons.scss';
+@import './_defaults/mixins.scss';
 
 body {
     margin: 0;
     color: $text-color;
     background-color: $bg-color;
+}
+
+.body-container, .footer {
+    margin: 24px;
 }
 
 a {
@@ -18,21 +23,73 @@ a {
     }
 }
 
+.header,
+.footer {
+    font-family: ark-pixel-12;
+}
+
 .header {
     background-color: $bg-sub-color;
     color: $link-color;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+
+    display: grid;
+    align-items: end;
+    grid-template-columns: auto 1fr auto;
+    gap: 2em;
+    padding: 0 24px;
+
+    $title-size: 36px;
+    $text-size: 24px;
+    $text-padding-top: 10px;
+    $text-padding-bottom: 14px;
+
+    padding-top: $text-padding-top;
+
+    .header-brand {
+        font-size: $title-size;
+        padding-bottom: $text-padding-bottom;
+        line-height: 1;
+
+        @include link-color($link-stress-color);
+    }
+
+    ul,
+    li {
+        text-decoration: none;
+        list-style: none;
+        line-height: 1;
+    }
 
     .header-menu {
-        width: 50%;
         display: flex;
-        justify-content: space-around;
+        gap: 0.5em;
+
+        margin: 0;
+        margin-block: 0;
+        margin-inline: 0;
+        padding-inline: 0;
+
+        font-size: $text-size;
+
+        .menu-item {
+            padding: $text-padding-top 0.75em $text-padding-bottom 0.75em;
+            border-radius: 5px 5px 0 0;
+
+            &[data-stressed] {
+                background-color: $bg-color;
+            }
+        }
     }
 
-    a, a:visited, a:hover {
-        color: $link-stress-color;
+    .header-link {
+        font-size: $text-size;
+        padding: $text-padding-top 0 $text-padding-bottom 0;
+        line-height: 1;
     }
+
+    @include link-color($link-color);
+}
+
+.footer {
+    font-size: 18px;
 }

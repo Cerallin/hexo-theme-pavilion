@@ -1,8 +1,5 @@
-import Hexo = require("hexo");
-import { TCategory, CATEGORIES } from "./types";
-
 class Options {
-    category: TCategory;
+    category: "anime" | "book" | "comic" | "music";
     limit: number = 3;
 };
 

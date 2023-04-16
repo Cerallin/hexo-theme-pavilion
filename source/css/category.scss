@@ -1,0 +1,95 @@
+@import './_defaults/colors.scss';
+
+.item-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  justify-items: center;
+
+  .item-wrapper {
+    $paper-width: 210px;
+    $paper-height: 297px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: $paper-width;
+
+    @mixin book-image() {
+      width: $paper-width;
+      height: $paper-height;
+
+      border-radius: 5px;
+      box-shadow: 3px 1px $bg-sub-color;
+
+    }
+
+    .item-image {
+      width: $paper-width;
+      height: $paper-height;
+      position: relative;
+
+      img {
+        object-fit: cover;
+        @include book-image();
+      }
+    }
+
+    .item-caption {
+      display: none;
+    }
+
+    .item-image img:hover+.item-caption,
+    .item-caption:hover {
+      @include book-image();
+
+      display: flex;
+      align-items: center;
+
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      background-color: #000000bf;
+
+      h2 {
+        text-align: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        font-size: 32px;
+        font-family: 'ark-pixel-12';
+        font-weight: normal;
+
+        line-height: 1.25;
+
+        padding: 0.5em 0.25em;
+        margin-top: 0;
+        margin-bottom: 2em;
+      }
+    }
+
+    .item-series {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .item-series-box {
+        background-color: $dim-color;
+        height: 3px;
+        border-radius: 2px;
+        margin-bottom: 5px;
+
+        box-shadow: 3px 1px $bg-sub-color;
+
+        &:nth-child(1) {
+          width: 80%;
+        }
+
+        &:nth-child(2) {
+          width: 90%;
+        }
+      }
+    }
+  }
+}

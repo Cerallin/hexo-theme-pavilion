@@ -10,10 +10,11 @@ html(lang=config.language)
         // header
         include header
         // body content
-        if body
-            div!= body
-        else
-            block content
+        .body-container
+            if body
+                div!= body
+            else
+                block content
         // footer
         include footer
 

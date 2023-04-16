@@ -7,9 +7,5 @@ menu:
 
   about: 关于
 
-entries:
-  anime: 动&ensp;画
-  comics: 漫&ensp;画
-  games: 游&ensp;戏
-  books: 书&ensp;籍
-  music: 音&ensp;乐
+item-list:
+  series: "（系列）"
