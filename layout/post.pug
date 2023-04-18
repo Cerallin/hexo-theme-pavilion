@@ -1,23 +1,35 @@
 extends page
 
 block css
-    link(rel="stylesheet", href="/css/article.css")
+    != css('/css/article')
 
 block content
+    -
+        let category = 'music'
+
+        if (has_category(page, 'anime'))
+            category = 'anime'
+        else if (has_category(page, 'book'))
+            category = 'book'
+        else if (has_category(page, 'comic'))
+            category = 'book'
+        else
+            category = 'music'
+
     .article
         // Item info
         // TODO check posts categories
         unless page.categories.length < 1
-            if has_category(page, 'anime')
-                include item-info/anime
-            else if has_category(page, 'book')
-                include item-info/book
-            else if has_category(page, 'comic')
-                include item-info/book
+            if category === 'anime'
+                != partial('item-info/anime')
+            else if category === 'book'
+                != partial('item-info/book')
             else
-                include item-info/music
+                != partial('item-info/music')
 
         // content
-        .article-contents
-            h2.article-title= page.title
+        .article-contents(data-content-type=category)
+            - const meta = post_meta(page)
+            if (page.title !== meta.title)
+                h2.article-title= page.title
             != page.content

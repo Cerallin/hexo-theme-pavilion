@@ -7,8 +7,6 @@ html(lang=config.language)
         link(rel="stylesheet", href="/css/style.css")
         link(rel="stylesheet", href="css/index.css")
     body
-        // head
-
         // title
         .index-container
             .index-title-box
@@ -19,11 +17,13 @@ html(lang=config.language)
                 a(href=config.pavilion['author-link'] || '').index-author @
                     |
                     span= config.author
+                .index-bubble
+                    a(href= url_for('/about'))= __('menu.about')
             // entries
             .index-entries
                 .category-entry
                     h2.entry-title
-                        a(href='/categories/anime')= __('menu.anime')
+                        a(href= url_for('/categories/anime'))= __('menu.anime')
 
                 .entry-seperator
 
@@ -42,10 +42,3 @@ html(lang=config.language)
                 .category-entry
                     h2.entry-title
                         a(href='/categories/music')= __('menu.music')
-                //- include entries/anime
-                //- include entries/book
-                //- include entries/comic
-                //- include entries/game
-                //- include entries/music
-
-        // footer

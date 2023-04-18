@@ -9,6 +9,7 @@
 
     .index-title-box {
         margin-top: 30vh;
+        position: relative;
 
         .index-title {
             font-family: ark-pixel-12;
@@ -60,6 +61,94 @@
             content: '·'; // U+000B7 or &middot;
             font-size: $entry-title-size;
             font-family: ark-pixel-12;
+        }
+    }
+
+    .index-bubble {
+        $px: 4px;
+
+        $bubble-black: black;
+        $bubble-white: $bg-sub-color;
+        $bubble-shadow: $dim-color;
+
+        display: inline-block;
+        position: absolute;
+        top: -50px;
+        right: -60px;
+
+        transform: rotate(10deg);
+        margin: 5*$px;
+        padding: 4px;
+
+        font-family: ark-pixel-12;
+        line-height: 1.2em;
+        font-size: 20px;
+        text-align: center;
+
+        background-color: $bubble-white;
+        color: $bubble-black;
+
+        box-sizing: border-box;
+
+        box-shadow:
+            // bubble border
+            0 -1*$px $bubble-white,
+            0 -2*$px $bubble-black,
+            $px 0 $bubble-white,
+            $px -1*$px $bubble-black,
+            2*$px 0 $bubble-black,
+            0 $px $bubble-white,
+            0 2*$px $bubble-black,
+            -1*$px 0 $bubble-white,
+            -1*$px $px $bubble-black,
+            -2*$px 0 $bubble-black,
+            -1*$px -1*$px $bubble-black,
+            $px $px $bubble-black,
+            // bubble shadow
+            $px 3*$px $bubble-shadow,
+            3*$px $px $bubble-shadow,
+            2*$px 2*$px $bubble-shadow;
+
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            box-sizing: border-box;
+
+            height: $px;
+            width: $px;
+            bottom: -2*$px;
+            left: 3*$px;
+            box-shadow:
+                // bubble tail
+                0 $px $bubble-black,
+                0 2*$px $bubble-black,
+                0 3*$px $bubble-black,
+                0 4*$px $bubble-black,
+                1*$px 3*$px $bubble-black,
+                2*$px 2*$px $bubble-black,
+                3*$px 1*$px $bubble-black,
+                1*$px $px $bubble-white,
+                2*$px $px $bubble-white,
+                1*$px 2*$px $bubble-white,
+                1*$px 0 $bubble-white,
+                2*$px 0 $bubble-white,
+                3*$px 0 $bubble-white,
+                // tail shadow
+                $px $px $bubble-shadow,
+                $px 3*$px $bubble-shadow,
+                $px 4*$px $bubble-shadow,
+                $px 5*$px $bubble-shadow,
+                2*$px 2*$px $bubble-shadow,
+                2*$px 3*$px $bubble-shadow,
+                2*$px 4*$px $bubble-shadow,
+                3*$px 2*$px $bubble-shadow,
+                3*$px 3*$px $bubble-shadow,
+                4*$px 1*$px $bubble-shadow,
+                4*$px 2*$px $bubble-shadow,
+                2*$px $px $bubble-shadow,
+                3*$px $px $bubble-shadow,
+                4*$px $px $bubble-shadow;
         }
     }
 }

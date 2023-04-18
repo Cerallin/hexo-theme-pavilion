@@ -1,15 +1,15 @@
-extend layout/layout
+extends layout/layout
 
 block css
-    link(rel="stylesheet", href="/css/category.css")
+    != css('/css/category')
 
 block content
     case page.category
         when 'book'
-            include item-list/books
+            != partial('item-list/books', {}, {cache: true})
         when 'comic'
-            include item-list/comics
+            != partial('item-list/comics', {}, {cache: true})
         when 'anime'
-            include item-list/anime
+            != partial('item-list/anime', {}, {cache: true})
         when 'music'
-            include item-list/music
+            != partial('item-list/music', {}, {cache: true})

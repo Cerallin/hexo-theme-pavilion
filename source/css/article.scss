@@ -2,81 +2,116 @@
 @import './_defaults/fonts.scss';
 
 .article {
-    @media (min-width: 768px) {
-        max-width: 600px;
+    @mixin article-width() {
+        @media (min-width: 768px) {
+            width: 750px;
+        }
+
+        @media (min-width: 1200px) {
+            width: 1000px;
+        }
+
+        width: 100%;
     }
 
-    @media (min-width: 1200px) {
-        max-width: 900px;
-    }
-
-    max-width: 100%;
+    @include article-width();
 
     font-size: $text-size;
-
-    display: grid;
-    grid-template-columns: 180px minmax(400px, 1fr);
-    column-gap: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .book-info {
+        width: 100%;
+
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        position: relative;
+        align-items: center;
 
-        &::after {
-            content: ' ';
-            position: absolute;
-            background-color: $link-stress-color;
-            box-shadow: 1px 1px 1px $link-color;
-            height: 100%;
-            width: 1px;
-            margin-right: -0.5em;
+        @mixin image-size() {
+            @include article-width();
+
+            @media (min-width: 768px) {
+                height: 60vh;
+            }
+
+            @media (min-width: 1200px) {
+                height: 75vh;
+            }
+
+            height: 40vh;
         }
 
         .book-image {
-            width: 100%;
             position: relative;
-            object-fit: cover;
-            object-position: top;
-            border-radius: 5px;
+            z-index: -1;
+            width: 100%;
+
+            img {
+                @include image-size();
+                object-fit: cover;
+                object-position: top;
+                border-radius: 5px 5px 0 0;
+            }
+
+            &::after {
+                content: ' ';
+
+                position: absolute;
+                left: 0;
+                top: 0;
+
+                @include image-size();
+
+                background: linear-gradient(to bottom,
+                        transparent 0%,
+                        transparent 40%,
+                        rgba($bg-color, 1) 100%,
+                    );
+            }
         }
 
         .book-info-box {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            margin-top: 1em;
+            width: 90%;
+            margin-top: -15vh;
+            margin-bottom: 2em;
+
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: end;
+            justify-items: stretch;
 
             .book-title {
-                text-align: right;
-                font-size: $text-size;
-                line-height: 1.2;
-                margin-bottom: 0.5em;
-                color: $link-color;
-            }
-
-            .book-date {
-                line-height: 1;
-                margin-bottom: 0.25em;
+                font-size: $title-size;
+                font-weight: bold;
+                margin-top: 0;
+                margin-bottom: 0;
             }
 
             .book-authors {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
+                text-align: right;
+                line-height: 1;
+
+                .author-name:nth-child(1) {
+                    font-size: 1.2 * $text-size;
+                }
 
                 .author-name {
-                    line-height: 1;
-                    margin-bottom: 0.25em;
+                    margin-top: 0.25em;
                 }
             }
         }
     }
 
-    .article-contents {
+    .article-contents[data-content-type="book"] {
+        width: 90%;
+        margin-top: 1.5em;
+
         .article-title {
-            margin-top: 0;
+            margin-top: -3em;
+            font-size: $subtitle-size;
+            font-weight: normal;
+            margin-bottom: 3.5em;
         }
 
         p {
