@@ -4,8 +4,7 @@ html(lang=config.language)
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width,initial-scale=1")
-        link(rel="stylesheet", href="/css/style.css")
-        link(rel="stylesheet", href="css/index.css")
+        != css("/css/style", "css/index")
     body
         // title
         .index-container
@@ -29,16 +28,16 @@ html(lang=config.language)
 
                 .category-entry
                     h2.entry-title
-                        a(href='/categories/book')= __('menu.books')
+                        a(href= url_for('/categories/book'))= __('menu.books')
 
                 .entry-seperator
 
                 .category-entry
                     h2.entry-title
-                        a(href='/categories/comic')= __('menu.comics')
+                        a(href= url_for('/categories/comic'))= __('menu.comics')
 
                 .entry-seperator
 
                 .category-entry
                     h2.entry-title
-                        a(href='/categories/music')= __('menu.music')
+                        a(href= url_for('/categories/music'))= __('menu.music')

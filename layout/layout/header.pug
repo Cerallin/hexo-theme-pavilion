@@ -1,17 +1,17 @@
 header.header
     // brand?
     .header-brand
-        a(href='/')= config.title
+        a(href= url_for('/'))= config.title
     // menu links
     ul.header-menu
         li.menu-item(data-stressed= page.category == 'anime')
-            a(href='/categories/anime')= __('menu.anime')
+            a(href= url_for('/categories/anime'))= __('menu.anime')
         li.menu-item(data-stressed= page.category == 'comic')
-            a(href='/categories/comic')= __('menu.comics')
+            a(href= url_for('/categories/comic'))= __('menu.comics')
         li.menu-item(data-stressed= page.category == 'book')
-            a(href='/categories/book')= __('menu.books')
+            a(href= url_for('/categories/book'))= __('menu.books')
         li.menu-item(data-stressed= page.category == 'music')
-            a(href='/categories/music')= __('menu.music')
+            a(href= url_for('/categories/music'))= __('menu.music')
     // about page
     .header-link
-        a(href='/about')= __('menu.about')
+        a(href=  url_for('/about'))= __('menu.about')
