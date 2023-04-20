@@ -82,7 +82,7 @@
             justify-items: stretch;
 
             .book-title {
-                font-size: $title-size;
+                font-size: $large-title-size;
                 font-weight: bold;
                 margin-top: 0;
                 margin-bottom: 0;
@@ -91,6 +91,10 @@
             .book-authors {
                 text-align: right;
                 line-height: 1;
+
+                @media (max-width: 768px) {
+                    display: none;
+                }
 
                 .author-name:nth-child(1) {
                     font-size: 1.2 * $text-size;

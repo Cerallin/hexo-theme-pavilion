@@ -3,7 +3,6 @@
 
 .index-container {
     display: grid;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -16,8 +15,12 @@
             font-size: 48px;
             text-shadow: 5px 5px $bg-sub-color;
 
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
+
             &:has(span) h1 {
-                margin-bottom: -18px;
+                margin-bottom: -0.2em;
             }
 
             h1 {
@@ -37,6 +40,10 @@
 
             font-family: ark-pixel-10;
             font-size: 40px;
+
+            @media (max-width: 768px) {
+                font-size: 24px;
+            }
         }
     }
 
@@ -51,7 +58,6 @@
 
         .entry-title {
             text-shadow: 2px 2px $dim-color;
-
             font-size: $entry-title-size;
             font-family: ark-pixel-12;
             line-height: 1;
@@ -61,6 +67,14 @@
             content: '·'; // U+000B7 or &middot;
             font-size: $entry-title-size;
             font-family: ark-pixel-12;
+        }
+
+        @media (max-width: 768px) {
+            margin-top: 0.25em;
+
+            .entry-title {
+                font-size: $entry-title-size * 0.8;
+            }
         }
     }
 
@@ -89,9 +103,7 @@
         color: $bubble-black;
 
         box-sizing: border-box;
-
-        box-shadow:
-            // bubble border
+        box-shadow: // bubble border
             0 -1*$px $bubble-white,
             0 -2*$px $bubble-black,
             $px 0 $bubble-white,
@@ -108,6 +120,10 @@
             $px 3*$px $bubble-shadow,
             3*$px $px $bubble-shadow,
             2*$px 2*$px $bubble-shadow;
+
+        @media (max-width: 768px) {
+            right: 0;
+        }
 
         &::after {
             content: '';
