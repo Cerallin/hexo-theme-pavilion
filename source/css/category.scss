@@ -173,16 +173,37 @@
 }
 
 .item-list[data-item-type="anime"] {
-  .item-image {
-    width: 200px;
+  .item-wrapper {
+    align-items: center;
 
-    img {
-      object-fit: cover;
+    .item-image {
+      width: 200px;
 
-      width: inherit;
+      img {
+        object-fit: cover;
 
-      border: 1px solid $dim-color;
-      border-radius: 5px;
+        width: 100%;
+
+        border: 1px solid $dim-color;
+        border-radius: 5px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      $spacing: 24px;
+      width: calc(100% - #{2 * $spacing});
+
+      .item-image {
+        width: 100%;
+      }
+
+      &:nth-child(odd) {
+        margin-left: $spacing;
+      }
+
+      &:nth-child(even) {
+        margin-right: $spacing;
+      }
     }
   }
 }
