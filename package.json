@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Cerallin/hexo-theme-pavilion#readme",
   "dependencies": {
-    "pavilion-core": "^1.0.3",
+    "pavilion-core": "^1.0.4",
     "pixelarticons": "^1.7.0"
   },
   "devDependencies": {
