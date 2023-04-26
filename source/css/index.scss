@@ -122,7 +122,8 @@
             2*$px 2*$px $bubble-shadow;
 
         @media (max-width: 768px) {
-            right: 0;
+            top: -60px;
+            right: 20px;
         }
 
         &::after {

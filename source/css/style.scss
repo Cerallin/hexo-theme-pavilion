@@ -1,9 +1,6 @@
-@use "sass:map";
-
 @import './_defaults/colors.scss';
 // TODO fonts
 @import '_defaults/fonts.scss';
-@import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
 @import './_defaults/mixins.scss';
 
 body {
@@ -45,7 +42,7 @@ a {
 
     display: grid;
     align-items: end;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 0 1fr auto;
     gap: 2em;
     padding: 0 24px;
     padding-top: $text-padding-top;
@@ -95,25 +92,42 @@ a {
     }
 
     @media (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
+        grid-template-columns: auto 1fr;
         align-items: center;
+        gap: 1em;
+
+        padding: 10px 24px;
 
         .header-brand {
             align-self: flex-start;
             width: 100%;
             display: flex;
             justify-content: space-between;
+            padding-bottom: 0;
+            font-size: 32px;
+        }
 
-            &::after {
-                content: 'v';
-                cursor: pointer;
-            }
+        .header-menu-button {
+            @include pixel-icon(1.5);
+            cursor: pointer;
+            justify-self: flex-end;
         }
 
         .header-menu {
+            margin-top: 14px;
             flex-direction: column;
-            display: none !important;
+            display: none;
+
+            &[data-toggle] {
+                display: flex;
+                grid-column: 1 / span 2;
+            }
+
+            .menu-item {
+                padding: 8px 0.75em 10px 7px;
+                border-radius: 5px;
+                margin-left: -7px;
+            }
         }
 
         .header-link {
@@ -186,10 +200,10 @@ a {
         align-items: flex-start;
     }
 
-    .page-content {
-        max-width: 900px;
-
-        margin-left: 24px;
-        margin-right: 24px;
+    @media (max-width: 768px) {
+        .page-content {
+            margin-left: 24px;
+            margin-right: 24px;
+        }
     }
 }

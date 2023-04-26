@@ -2,16 +2,23 @@ header.header
     // brand?
     .header-brand
         a(href= url_for('/'))= config.title
+    // menu button
+    #menu-button.header-menu-button
+        != pixelart_icon('chevron-down')
     // menu links
-    ul.header-menu
-        li.menu-item(data-stressed= page.category == 'anime')
-            a(href= url_for('/categories/anime'))= __('menu.anime')
-        li.menu-item(data-stressed= page.category == 'comic')
-            a(href= url_for('/categories/comic'))= __('menu.comics')
-        li.menu-item(data-stressed= page.category == 'book')
-            a(href= url_for('/categories/book'))= __('menu.books')
-        li.menu-item(data-stressed= page.category == 'music')
-            a(href= url_for('/categories/music'))= __('menu.music')
+    ul#menu-list.header-menu
+        a(href= url_for('/categories/anime'))
+            li.menu-item(data-stressed= page.category == 'anime')
+                = __('menu.anime')
+        a(href= url_for('/categories/comic'))
+            li.menu-item(data-stressed= page.category == 'comic')
+                = __('menu.comics')
+        a(href= url_for('/categories/book'))
+            li.menu-item(data-stressed= page.category == 'book')
+                = __('menu.books')
+        a(href= url_for('/categories/music'))
+            li.menu-item(data-stressed= page.category == 'music')
+                = __('menu.music')
     // about page
     .header-link
         a(href=  url_for('/about'))= __('menu.about')

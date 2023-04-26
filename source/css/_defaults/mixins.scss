@@ -6,3 +6,8 @@
         color: $color;
     }
 }
+
+@mixin pixel-icon($scale: 1) {
+    width: $scale * 24px;
+    height: $scale * 24px;
+}

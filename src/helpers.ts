@@ -1,5 +1,4 @@
 import Hexo = require("hexo");
-import { htmlTag, url_for } from 'hexo-util/dist';
 
 class Options {
     category: "anime" | "book" | "comic" | "music";
@@ -54,6 +53,9 @@ interface ICSSEntry {
 };
 
 hexo.extend.helper.register('css', function (...args: string[] | ICSSEntry[]) {
+    const htmlTag = hexo.extend.helper.get('html_tag'),
+        url_for = hexo.extend.helper.get('url_for');
+
     const timestamp = Date.now();
     const result = args.flat(Infinity).map(item => {
         if (typeof item === 'string' || item instanceof String) {
@@ -78,6 +80,9 @@ interface IJSEntry {
 };
 
 hexo.extend.helper.register('js', function (...args: string[] | IJSEntry[]) {
+    const htmlTag = hexo.extend.helper.get('html_tag'),
+        url_for = hexo.extend.helper.get('url_for');
+
     const timestamp = Date.now();
     const result = args.flat(Infinity).map(item => {
         if (typeof item === 'string' || item instanceof String) {
