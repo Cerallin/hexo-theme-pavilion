@@ -1,5 +1,5 @@
 .item-list(data-item-type='anime')
-    - const posts = posts_sort(posts_query({category: 'anime'}));
+    - const posts = post_query({category: 'anime', sort: 'desc'});
 
     each post in posts
         - const meta = post_meta(post)

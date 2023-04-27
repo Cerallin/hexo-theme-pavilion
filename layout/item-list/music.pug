@@ -1,5 +1,5 @@
 .item-list(data-item-type='music')
-    each post in posts_sort(posts_query({category: 'music'}))
+    each post in post_query({category: 'music', sort: 'desc'})
         - const meta = post_meta(post)
         .item-wrapper
             a(href= url_for(post.path), alt= post.title, title= post.title)

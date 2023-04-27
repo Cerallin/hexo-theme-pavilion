@@ -5,31 +5,46 @@ block css
 
 block content
     -
-        let category = 'music'
-
-        if (has_category(page, 'anime'))
-            category = 'anime'
-        else if (has_category(page, 'book'))
-            category = 'book'
-        else if (has_category(page, 'comic'))
-            category = 'book'
-        else
-            category = 'music'
+        function category_of(post) {
+            return ['anime', 'book', 'comic', 'music']
+                .find(cat => has_category(post, cat)) || 'music'
+        }
 
     .article
+        - const category = category_of(page)
+
         // Item info
-        // TODO check posts categories
         unless page.categories.length < 1
             if category === 'anime'
                 != partial('item-info/anime')
-            else if category === 'book'
+            else if category === 'book' || category === 'comic'
                 != partial('item-info/book')
             else
                 != partial('item-info/music')
 
         // content
-        .article-contents(data-content-type=category)
+        .article-contents(data-content-type= category)
             - const meta = post_meta(page)
-            if (page.title !== meta.title)
+            if (has_category(page, 'book') && page.title !== meta.title)
                 h2.article-title= page.title
             != page.content
+
+        - const references = post_refers(page)
+        -
+            function icon_of(category) {
+                return {
+                    'anime': 'video',
+                    'book': 'article',
+                    'comic': 'image',
+                    'music': 'headphone',
+                }[category];
+            }
+        if references.length
+            .reference
+                h3.reference-title= __('reference.title')
+                each post of references
+                    if post
+                        .reference-info
+                            .reference-icon!= pixelart_icon(icon_of(category_of(post)))
+                            .reference-title
+                                a(href= url_for(post.path))= post.title

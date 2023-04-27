@@ -5,11 +5,12 @@
         "outDir": "scripts",
         "resolveJsonModule": true,
         "esModuleInterop": true,
+        "downlevelIteration": true,
     },
     "include": [
         "src/*.ts",
+        "src/commands/*.ts",
+        "src/helpers/*.ts",
+        "src/overrides/*.ts",
     ],
-    "exclude": [
-        "scripts"
-    ]
 }

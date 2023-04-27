@@ -7,17 +7,25 @@ header.header
         != pixelart_icon('chevron-down')
     // menu links
     ul#menu-list.header-menu
+        -
+            function page_category(category) {
+                if (page.category === category)
+                    return true;
+                if (page.categories && has_category(page, category))
+                    return true;
+                return false;
+            }
         a(href= url_for('/categories/anime'))
-            li.menu-item(data-stressed= page.category == 'anime')
+            li.menu-item(data-stressed= page_category('anime'))
                 = __('menu.anime')
         a(href= url_for('/categories/comic'))
-            li.menu-item(data-stressed= page.category == 'comic')
+            li.menu-item(data-stressed= page_category('comic'))
                 = __('menu.comics')
         a(href= url_for('/categories/book'))
-            li.menu-item(data-stressed= page.category == 'book')
+            li.menu-item(data-stressed= page_category('book'))
                 = __('menu.books')
         a(href= url_for('/categories/music'))
-            li.menu-item(data-stressed= page.category == 'music')
+            li.menu-item(data-stressed= page_category('music'))
                 = __('menu.music')
     // about page
     .header-link

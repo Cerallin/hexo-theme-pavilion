@@ -17,6 +17,8 @@
     @include article-width();
 
     font-size: $text-size;
+    margin-top: 24px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,10 +109,86 @@
         }
     }
 
-    .article-contents[data-content-type="book"] {
+    .cd-info {
+        $width: 100%;
+
+        width: 90%;
+        margin: auto;
+
+        display: grid;
+        grid-template-columns: 30% 60%;
+        column-gap: 24px;
+
+        font-size: $small-text-size;
+
+        .cd-cover {
+            grid-row: 1 / span 2;
+            justify-self: flex-start;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .cd-info-box {
+            .cd-title {
+                margin: 0;
+                font-weight: normal;
+                font-size: $title-size;
+            }
+
+            .cd-date {
+                margin-top: 1em;
+                margin-bottom: 0.5em;
+            }
+        }
+
+        .cd-artists {
+            padding-top: 1em;
+            align-self: end;
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+
+            .cd-artists {
+                align-self: auto;
+                line-height: 1.5;
+            }
+        }
+    }
+
+    .anime-info {
+        width: 90%;
+        margin: auto;
+
+        .anime-post {
+            display: flex;
+            justify-content: center;
+
+            img {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    }
+
+    .article-contents {
         width: 90%;
         margin-top: 1.5em;
 
+        .article-title {
+            font-size: $title-size;
+            margin-top: 2em;
+            margin-bottom: 1.5em;
+        }
+    }
+
+    .article-contents[data-content-type="book"] {
         .article-title {
             margin-top: -3em;
             font-size: $subtitle-size;
@@ -122,6 +200,28 @@
             line-height: 1.5;
             font-size: $text-size;
             margin-top: 1em;
+        }
+    }
+
+    .reference {
+        width: 90%;
+
+        .reference-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 0.75em;
+            align-items: center;
+
+            line-height: 1;
+
+            .reference-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            & + .reference-info {
+                margin-top: 0.5em;
+            }
         }
     }
 }

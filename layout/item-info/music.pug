@@ -1,1 +1,11 @@
-p this is a piece of music
+- const meta = post_meta(page)
+
+.cd-info
+    .cd-cover
+        img(src= meta.cover, alt= meta.title)
+    .cd-info-box
+        h2.cd-title= meta.title
+        .cd-date= meta.date
+    .cd-artists
+        each artist of meta.artists
+            .artist-name= artist
