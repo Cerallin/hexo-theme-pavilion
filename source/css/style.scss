@@ -29,6 +29,54 @@ a {
 .footer {
     font-family: ark-pixel-12;
     font-size: 18px;
+
+    hr {
+        height: 1px;
+        border: unset;
+        $w50: 50%;
+        background: linear-gradient(to right,
+                $dim-color,
+                $dim-sub-color $w50 * 1/3,
+                $link-stress-color $w50 * 2/3,
+                $link-color 50%,
+                $link-color 50%,
+                $link-stress-color $w50 * 4/3,
+                $dim-sub-color $w50 * 5/3,
+                $dim-color 100%);
+    }
+
+    .footer-link-box {
+        $footer-link-colors:
+            $link-color,
+            $dim-color,
+            $dim-sub-color,
+            $link-stress-color;
+
+        @for $i from 1 to 4 {
+            .footer-link:nth-child(8n + #{$i}),
+            .footer-link:nth-child(8n + #{8 - $i + 1}) {
+                color: nth($footer-link-colors, $i + 1);
+            }
+        }
+
+        .footer-link+.footer-link {
+            margin-left: 1em;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding-left: 24px;
+        padding-right: 24px;
+
+        .footer-link-box {
+            display: flex;
+            flex-direction: column;
+
+            .footer-link+.footer-link {
+                margin-left: unset;
+            }
+        }
+    }
 }
 
 .header {

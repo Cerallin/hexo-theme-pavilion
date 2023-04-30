@@ -219,9 +219,28 @@
                 height: 24px;
             }
 
-            & + .reference-info {
+            &+.reference-info {
                 margin-top: 0.5em;
             }
+        }
+    }
+
+    .footnotes,
+    .footnotes-sep {
+        max-width: 600px;
+    }
+
+    .footnotes-sep {
+        margin-top: 2.5em;
+        margin-left: 0;
+    }
+
+    .footnotes {
+        p {
+            font-size: $small-text-size !important;
+            margin-top: 0 !important;
+            margin-block: 0;
+            margin-inline: 0;
         }
     }
 }

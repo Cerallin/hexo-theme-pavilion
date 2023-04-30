@@ -1,6 +1,11 @@
 - const cur_year = date(Date.now(), "YYYY");
 
 footer.footer
+    hr
+    .footer-link-box
+        each link in Object.keys(config.footer_links)
+            - const url = config.footer_links[link]
+            a.footer-link(href= url_for(url))= link
     .footer-copy &copy;
         |
         |
