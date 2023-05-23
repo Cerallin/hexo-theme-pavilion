@@ -25,7 +25,7 @@ block content
         // content
         .article-contents(data-content-type= category)
             - const meta = post_meta(page)
-            if (has_category(page, 'book') && page.title !== meta.title)
+            if ((category === 'book' || category === 'comic') && page.title !== meta.title)
                 h2.article-title= page.title
             != page.content
 
